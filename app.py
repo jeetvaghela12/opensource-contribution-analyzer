@@ -13,9 +13,23 @@ st.markdown("""
 """)
 
 # --- Sidebar Configuration ---
-st.sidebar.header("Configuration")
-token = st.sidebar.text_input("GitHub Personal Access Token", type="password", help="Enter your GitHub PAT to fetch data.")
-repo_input = st.sidebar.text_input("Repository Path", "pallets/flask", help="Format: username/repository")
+st.sidebar.header('Configuration')
+
+# Streamlit Secrets se automatic token uthayega
+default_token = st.secrets.get("GITHUB_TOKEN", "")
+
+token = st.sidebar.text_input(
+    "GitHub Personal Access Token", 
+    value=default_token, 
+    type='password', 
+    help="Enter your GitHub PAT to fetch data."
+)
+
+repo_input = st.sidebar.text_input(
+    "Repository Path", 
+    "pallets/flask", 
+    help="Format: username/repository"
+)
 
 # --- Logic and Analysis ---
 if st.sidebar.button("Run Analysis"):
